@@ -20,7 +20,7 @@ const Cart = () => {
   //     setIsLoading(true);
   //     try {
   //       const response = await fetch(
-  //         `http://localhost:5000/api/items/usercart/${auth.userId}`
+  //         `https://ration.onrender.com/api/items/usercart/${auth.userId}`
   //       );
 
   //       const responseData = await response.json();
@@ -45,7 +45,7 @@ const Cart = () => {
         // setIsLoading(true);
         try {
           const response = await fetch(
-            `http://localhost:5000/api/items/usercart/${auth.userId}`
+            `https://ration.onrender.com/api/items/usercart/${auth.userId}`
           );
   
           const responseData = await response.json();
@@ -71,7 +71,7 @@ const Cart = () => {
   //     setIsLoading(true);
   //     try {
   //       const response = await fetch(
-  //         `http://localhost:5000/api/items/amount/${auth.userId}`
+  //         `https://ration.onrender.com/api/items/amount/${auth.userId}`
   //       );
 
   //       const responseData = await response.json();
@@ -97,7 +97,7 @@ const Cart = () => {
 
         try {
           const response = await fetch(
-            `http://localhost:5000/api/items/amount/${auth.userId}`
+            `https://ration.onrender.com/api/items/amount/${auth.userId}`
           );
 
           const responseData = await response.json();

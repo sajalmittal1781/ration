@@ -20,7 +20,7 @@ const Signup = () => {
 
     try {
       setIsLoading(true);
-      const response = await fetch("http://localhost:5000/api/users/signup", {
+      const response = await fetch("https://ration.onrender.com/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

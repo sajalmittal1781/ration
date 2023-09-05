@@ -14,7 +14,7 @@ const TotalAmount = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5000/api/items/amount/${auth.userId}`
+          `https://ration.onrender.com/api/items/amount/${auth.userId}`
         );
 
         const responseData = await response.json();

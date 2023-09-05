@@ -16,7 +16,7 @@ const CartBody = (props) => {
     try {
       // setIsLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/items/cart/${auth.userId}`,
+        `https://ration.onrender.com/api/items/cart/${auth.userId}`,
         {
           method: "POST",
           headers: {

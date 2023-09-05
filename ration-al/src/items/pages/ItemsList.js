@@ -26,7 +26,7 @@ const ItemsList = () => {
         setIsLoading(true);
         try {
           const response = await fetch(
-            `http://localhost:5000/api/items/usercart/${auth.userId}`
+            `https://ration.onrender.com/api/items/usercart/${auth.userId}`
           );
 
           const responseData = await response.json();
@@ -51,7 +51,7 @@ const ItemsList = () => {
     const sendRequest = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch("http://localhost:5000/api/items");
+        const response = await fetch("https://ration.onrender.com/api/items");
 
         const responseData = await response.json();
 
