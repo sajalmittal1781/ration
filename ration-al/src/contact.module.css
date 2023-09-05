@@ -1,0 +1,18 @@
+/* .image{
+    margin-top: 5rem;
+    height: 20rem;
+    margin-left: 5rem;
+    border-radius: 1rem;
+} */
+
+.image{
+    height: 20rem;
+    margin-left: 5rem;
+    margin-top:5rem;
+}
+
+@media (max-width: 600px) {
+    .image {
+      height: 20rem;
+    }
+  }
