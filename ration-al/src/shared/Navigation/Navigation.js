@@ -3,13 +3,37 @@ import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import { AuthContext } from "../context/AuthContext";
 import Navlinks from "./Navlinks";
-
+import Backdrop from "../components/Backdrop";
 const Navigation = () => {
   const auth = useContext(AuthContext);
   const [navbar, setNavbar] = useState(false);
 
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+  const openDrawerHandler = () => {
+    setDrawerIsOpen(true);
+  };
+
+  const closeDrawerHandler = () => {
+    setDrawerIsOpen(false);
+  };
+
+  const nav=()=>{
+    setNavbar(!navbar)
+  }
+
+  const click=()=>{
+    nav();
+    openDrawerHandler()
+  }
+  const closeclick=()=>{
+    nav();
+    closeDrawerHandler()
+  }
+
   return (
     <>
+      {drawerIsOpen && <Backdrop class="z-50" onClick={closeclick} />}
       <nav class="bg-white dark:bg-gray-900   w-full z-20 top-0 left-0 border-gray-200 dark:border-gray-600">
         <div class="container  flex flex-wrap justify-between items-center mx-auto">
           <Link to="/" class="flex items-center">
@@ -32,8 +56,10 @@ const Navigation = () => {
 
             <div className=" flex flex-wrap md:hidden">
               <button
-                className="mr-1 p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
-                onClick={() => setNavbar(!navbar)}
+                className="mr-1 p-2 z-10 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                // onClick={() => setNavbar(!navbar) ; openDrawerHandler}
+                // onClick={openDrawerHandler}
+                onClick={click}
               >
                 {navbar ? (
                   <svg
@@ -74,7 +100,7 @@ const Navigation = () => {
             }`}
             id="navbar-sticky"
           >
-            <Navlinks />
+            <Navlinks onClick={closeclick} />
           </div>
         </div>
       </nav>
