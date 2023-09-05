@@ -1,3 +1,3 @@
 # ration store
 
-https://sajalmittal1781.github.io/
+https://sajalmittal1781.github.io/ration/
