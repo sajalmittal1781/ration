@@ -12,118 +12,93 @@ const Cart = () => {
   const [amount, setAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
+  const [loadedItems, setLoadedItems] = useState([]);
+  const [change, setChange] = useState(true);
 
-  const [loadedItems, setLoadedItems] = useState();
 
-  // useEffect(() => {
-  //   const sendRequest = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await fetch(
-  //         `https://ration.onrender.com/api/items/usercart/${auth.userId}`
-  //       );
+  const changeHandler = async (id, newquantity) => {
+    try {
+      const response = await fetch(
+        `https://ration.onrender.com/api/items/cart/${auth.userId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            item_id: id,
+            quantity: newquantity,
+          }),
+        }
+      );
 
-  //       const responseData = await response.json();
+      const responseData = await response.json();
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
 
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message);
-  //       }
+      setChange(!change)
+    } catch (err) {
+      setError(err.message || "Something went wrong, please try again.");
+    }
 
-  //       setLoadedItems(responseData.items);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     }
-  //     setIsLoading(false);
-  //   };
-  //   sendRequest();
-  // }, []);
+  };
 
   useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          `https://ration.onrender.com/api/items/usercart/${auth.userId}`
+        );
 
-    const interval=setInterval(()=>{
-      const sendRequest = async () => {
-        // setIsLoading(true);
-        try {
-          const response = await fetch(
-            `https://ration.onrender.com/api/items/usercart/${auth.userId}`
-          );
-  
-          const responseData = await response.json();
-  
-          if (!response.ok) {
-            throw new Error(responseData.message);
-          }
-  
-          setLoadedItems(responseData.items);
-        } catch (err) {
-          setError(err.message);
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
         }
-        // setIsLoading(false);
-      };
-      sendRequest();
-    },1000)
-  }, []);
 
-  // console.log(loadedItems);
+        const finalitems = responseData.items;
+        const display = finalitems.filter((item) => item.quantity !== 0);
 
-  // useEffect(() => {
-  //   const sendRequest = async () => {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await fetch(
-  //         `https://ration.onrender.com/api/items/amount/${auth.userId}`
-  //       );
 
-  //       const responseData = await response.json();
+        setLoadedItems(display);
 
-  //       if (!response.ok) {
-  //         throw new Error(responseData.message);
-  //       }
-
-  //       setAmount(responseData.amount);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     }
-  //     setIsLoading(false);
-  //   };
-  //   sendRequest();
-  // }, []);
-
-  useEffect(() => {
-    let interval = setInterval(() => {
-      const sendRequest = async () => {
-        // setIsLoading(true);
-        // console.log("Re");
-
-        try {
-          const response = await fetch(
-            `https://ration.onrender.com/api/items/amount/${auth.userId}`
-          );
-
-          const responseData = await response.json();
-
-          if (!response.ok) {
-            throw new Error(responseData.message);
-          }
-
-          setAmount(responseData.amount);
-        } catch (err) {
-          setError(err.message);
-        }
-        // setIsLoading(false);
-      };
-      sendRequest();
-    }, 1000);
-    return () => {
-      clearInterval(interval);
+      } catch (err) {
+        setError(err.message);
+      }
+      setIsLoading(false);
     };
-  }, []);
+    sendRequest();
+  }, [change]);
+
+
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `https://ration.onrender.com/api/items/amount/${auth.userId}`
+        );
+
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setAmount(responseData.amount);
+      } catch (err) {
+        setError(err.message);
+      }
+      setIsLoading(false);
+    };
+    sendRequest();
+  }, [change]);
 
   const errorHandler = () => {
     setError(null);
   };
 
-  // console.log(loadedItems[2].quantity);
   return (
     <>
       <ErrorModal error={error} onClear={errorHandler} />
@@ -134,19 +109,19 @@ const Cart = () => {
         </div>
       )}
 
-      <div class="bg-white h-screen py-8">
-        <div class="container mx-auto px-4">
-          <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
-          <div class="flex flex-col md:flex-row gap-4">
-            <div class="md:w-3/4">
-              <div class="bg-white rounded-lg shadow-xl p-6 mb-4">
-                <table class="w-full">
+      <div className="bg-white h-screen py-8">
+        <div className="container mx-auto px-4">
+          <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="md:w-3/4">
+              <div className="bg-white rounded-lg shadow-xl p-6 mb-4">
+                <table className="w-full">
                   <thead>
                     <tr>
-                      <th class="text-left font-semibold">Product</th>
-                      <th class="text-left font-semibold">Price</th>
-                      <th class="text-left font-semibold">Quantity</th>
-                      <th class="text-left font-semibold">Total</th>
+                      <th className="text-left font-semibold">Product</th>
+                      <th className="text-left font-semibold">Price</th>
+                      <th className="text-left font-semibold">Quantity</th>
+                      <th className="text-left font-semibold">Total</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -160,33 +135,34 @@ const Cart = () => {
                           quantity={item.quantity}
                           image={item.image}
                           tot={parseInt(item.quantity) * parseInt(item.price)}
+                          changeHandler={changeHandler}
                         />
                       ))}
                   </tbody>
                 </table>
               </div>
             </div>
-            <div class="md:w-1/4">
-              <div class="bg-white rounded-lg shadow-2xl p-6">
-                <h2 class="text-lg font-semibold mb-4">Summary</h2>
-                <div class="flex justify-between mb-2">
+            <div className="md:w-1/4">
+              <div className="bg-white rounded-lg shadow-2xl p-6">
+                <h2 className="text-lg font-semibold mb-4">Summary</h2>
+                <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
                   <span>${amount}</span>
                 </div>
-                <div class="flex justify-between mb-2">
+                <div className="flex justify-between mb-2">
                   <span>Taxes</span>
                   <span>$0.00</span>
                 </div>
-                <div class="flex justify-between mb-2">
+                <div className="flex justify-between mb-2">
                   <span>Shipping</span>
                   <span>$0.00</span>
                 </div>
-                <hr class="my-2" />
-                <div class="flex justify-between mb-2">
-                  <span class="font-semibold">Total</span>
-                  <span class="font-semibold">${amount}</span>
+                <hr className="my-2" />
+                <div className="flex justify-between mb-2">
+                  <span className="font-semibold">Total</span>
+                  <span className="font-semibold">${amount}</span>
                 </div>
-                <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
+                <button className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">
                   Checkout
                 </button>
               </div>

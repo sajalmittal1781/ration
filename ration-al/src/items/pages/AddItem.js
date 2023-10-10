@@ -35,9 +35,7 @@ const AddItem = () => {
       if (!response.ok) {
         throw new Error(responseData.message);
       }
-      console.log(responseData);
       setIsLoading(false);
-      // auth.login();
     } catch (err) {
       setIsLoading(false);
       setError(err.message || "Something went wrong, please try again.");

@@ -11,13 +11,9 @@ const ItemsList = () => {
   const [loadedItems, setLoadedItems] = useState();
   const auth = useContext(AuthContext);
   const [log, setLog] = useState(auth.isLoggedIn);
-
   const [quantity, setQuantity] = useState(0);
   const [loadedUserItems, setLoadedUserItems] = useState();
-
   const [lloadedItems, setLloadedItems] = useState();
-
-  // console.log(log);
 
   useEffect(() => {
     if (log) {
@@ -45,8 +41,6 @@ const ItemsList = () => {
     };
   }, []);
 
-  console.log(lloadedItems);
-
   useEffect(() => {
     const sendRequest = async () => {
       setIsLoading(true);
@@ -71,8 +65,6 @@ const ItemsList = () => {
     setError(null);
   };
 
-  // console.log(loadedUserItems);
-
   const mapping = new Map();
 
   if (auth.isLoggedIn && lloadedItems && loadedItems) {
@@ -84,7 +76,6 @@ const ItemsList = () => {
       });
     });
 
-    // console.log(mapping);
   }
 
   return (
@@ -97,7 +88,7 @@ const ItemsList = () => {
       )}
       {!isLoading && loadedItems && (
         <ul>
-          <div class="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          <div className="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {loadedItems.map((item) => (
               <ItemCard
                 key={item.id}

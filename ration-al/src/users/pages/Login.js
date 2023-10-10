@@ -24,7 +24,6 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // name: nameRef.current.value,
           email: emailRef.current.value,
           password: passRef.current.value,
         }),
@@ -34,7 +33,6 @@ const Login = () => {
       if (!response.ok) {
         throw new Error(responseData.message);
       }
-      // console.log(responseData);
       setIsLoading(false);
 
       

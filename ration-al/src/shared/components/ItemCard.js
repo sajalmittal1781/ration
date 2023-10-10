@@ -7,12 +7,7 @@ const ItemCard = (props) => {
   const auth = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
-  // console.log(typeof(props.quan));
   const [disabled, setDisabled] = useState(props.quan===0);
-
-  // console.log(disabled);
-  
-  
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -41,7 +36,6 @@ const ItemCard = (props) => {
       if (!response.ok) {
         throw new Error(responseData.message);
       }
-      console.log(responseData);
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -53,10 +47,7 @@ const ItemCard = (props) => {
     setError(null);
   };
 
-  // const val=props.quan.toString();
-
   const changeHandler=(event)=>{
-    // console.log(typeof(event.target.value));
     if(event.target.value==="0"){
       setDisabled(true);
     }
@@ -64,7 +55,6 @@ const ItemCard = (props) => {
       setDisabled(false);
     }
 
-    // console.log(disabled);
   }
 
   return (
@@ -95,11 +85,8 @@ const ItemCard = (props) => {
               {auth.email!=="admin@admin" && auth.email!=="" && <input
                 type="number"
                 min="0"
-                Value={props.quan}
-                // title={props.quan}
-                // placeholder={props.quan}
+                value={props.quan}
                 onChange={changeHandler}
-                
                 className="h-8 w-11 rounded-lg bg-gray-50 border-2"
               ></input>}
 

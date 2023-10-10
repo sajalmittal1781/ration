@@ -14,8 +14,6 @@ const Logout = () => {
 
   return (
     <>
-      {/* <Navigation /> */}
-
       <div className="grid h-screen place-items-center">
       <div>LOGOUT SUCCESSFULL</div>
       <Button>

@@ -39,7 +39,7 @@ const App = () => {
   if (isLoggedIn) {
     routes = (
       <Switch>
-        <Route path="/" exact>
+        <Route path="/home" exact>
           <Display />
         </Route>
         <Route path="/addItem" exact>
@@ -60,13 +60,13 @@ const App = () => {
         <Route path="/totalAmount/:userId" exact>
           <TotalAmount />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/home" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact>
+        <Route path="/home" exact>
           <Display />
         </Route>
         <Route path="/login" exact>
@@ -81,7 +81,7 @@ const App = () => {
         <Route path="/contact" exact>
           <Contact />
         </Route>
-        <Redirect to="/" />
+        <Redirect to="/home" />
       </Switch>
     );
   }

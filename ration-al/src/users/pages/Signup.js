@@ -16,7 +16,6 @@ const Signup = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    // console.log(nameRef.current.value);
 
     try {
       setIsLoading(true);
@@ -36,10 +35,7 @@ const Signup = () => {
       if (!response.ok) {
         throw new Error(responseData.message);
       }
-      // else{console.log("re");}
-      console.log(responseData);
       setIsLoading(false);
-      // auth.login();
     } catch (err) {
       setIsLoading(false);
       setError(err.message || "Something went wrong, please try again.");

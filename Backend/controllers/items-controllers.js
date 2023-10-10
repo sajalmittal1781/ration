@@ -168,7 +168,7 @@ const getItemsByUserId = async (req, res, next) => {
   }
 
   res.json({
-    items: userWithItems.items.map((item) => item),
+    items: userWithItems.items.filter((item) => item.quantity!==0),
   });
 };
 
