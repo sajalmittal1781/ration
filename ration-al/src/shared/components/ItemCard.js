@@ -85,7 +85,7 @@ const ItemCard = (props) => {
               {auth.email!=="admin@admin" && auth.email!=="" && <input
                 type="number"
                 min="0"
-                value={props.quan}
+                Value={props.quan}
                 onChange={changeHandler}
                 className="h-8 w-11 rounded-lg bg-gray-50 border-2"
               ></input>}

@@ -51,9 +51,6 @@ const TotalAmount = () => {
           <ul>
             {loadedItems.map((item) => (
               <div>{loadedItems}</div>
-
-              
-
             ))}
           </ul>
         </div>
